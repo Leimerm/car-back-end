@@ -9,6 +9,7 @@ one:
   price: 1
   body_style: MyString
   milage_integer: MyString
+  
 
 two:
   make: MyString
@@ -19,3 +20,4 @@ two:
   price: 1
   body_style: MyString
   milage_integer: MyString
+ 

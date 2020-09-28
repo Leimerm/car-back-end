@@ -1,11 +1,14 @@
 class Api::V1::CarsController < ApplicationController
+    before_action :set_car, only: [:show, :update, :destroy]
+    skip_before_action :authenticate, only: [:index, :show]
     #GET /cars
     def index
-        @cars = .all
+        @cars = Car.all
+        render json: @cars
     end
-    #Get /cars/1
+    #GET /cars/1
     def show 
-        @cars = Car.where(car_id : params[:id])
+        @cars = Car.where(car_id: params[:id])
         render json { car :@car}
     end
 
@@ -23,15 +26,12 @@ class Api::V1::CarsController < ApplicationController
 
 #PATCH/PUT cars/1
 
-    def update 
-         @car = Car.new(car_params)
-         if @car.save
+    def update
+        if @car.update(car_params)
             render json: @car
-         else
+        else
             render json: @car.errors, status: :unprocessable_entity
-         end
-
-            
+        end
     end
 
     def destroy
@@ -49,10 +49,5 @@ class Api::V1::CarsController < ApplicationController
         params.require(:car).permit(:make, :model, :year, :color, :warranty, :price, :body_style, :milage)
     end
     
-
-
-
-
-
 end
 
