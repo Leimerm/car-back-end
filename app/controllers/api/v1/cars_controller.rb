@@ -9,7 +9,7 @@ class Api::V1::CarsController < ApplicationController
     #GET /cars/1
     def show 
         @cars = Car.where(car_id: params[:id])
-        render json: {car :@car}
+        render json {car :@car}
     end
 
     #POST /cars
